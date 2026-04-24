@@ -41,6 +41,13 @@ export async function generateChatResponse(messages: { role: 'user' | 'model', c
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
         temperature: 0.7,
+        safetySettings: [
+          { category: "HATE_SPEECH", threshold: "OFF" },
+          { category: "DANGEROUS_CONTENT", threshold: "OFF" },
+          { category: "HARASSMENT", threshold: "OFF" },
+          { category: "SEXUALLY_EXPLICIT", threshold: "OFF" },
+          { category: "CIVIC_INTEGRITY", threshold: "OFF" },
+        ],
       },
     });
 
