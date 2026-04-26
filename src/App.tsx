@@ -153,7 +153,7 @@ export default function App() {
             </button>
             <div className="hidden lg:flex flex-col">
               <span className="text-xs font-bold text-blue-500 uppercase tracking-wider">Dashboard</span>
-              <span className="text-sm font-semibold text-slate-400">Welcome to LV Middle School Support</span>
+              <span className="text-sm font-semibold text-slate-400">Welcome to LV-Assist Support</span>
             </div>
           </div>
           <div className="flex items-center gap-4">
@@ -177,7 +177,7 @@ export default function App() {
               <div className="space-y-2">
                 <h2 className="text-3xl font-black text-slate-900 tracking-tight">How can I help you?</h2>
                 <p className="text-slate-500 font-medium leading-relaxed">
-                  I'm your LV Middle School AI assistant. I can help with your homework, explain science projects, or give you study tips!
+                  I'm LV-Assist, your academic AI companion. I can help with your homework, explain science projects, or give you study tips!
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-3 w-full">
