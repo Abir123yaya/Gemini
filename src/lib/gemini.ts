@@ -1,23 +1,44 @@
+import { GoogleGenAI } from "@google/genai";
+
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+
+export const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY! });
+
+export const SYSTEM_INSTRUCTION = `
+You are LV-Assist, a friendly and helpful AI assistant for students at LV Middle School.
+Your goal is to support students with their schoolwork, provide encouragement, and explain concepts simply and clearly.
+
+Guidelines:
+1. Tone: Encouraging, patient, and age-appropriate for middle school (11-14 years old).
+2. Safety: Never provide harmful content. Always prioritize school-appropriate topics.
+3. Clarity: Use simple language but don't talk down to students. Use analogies when helpful.
+4. Academic Support: Help with homework by guiding them to the answer, rather than just giving it. 
+5. Theme: You love LV Middle School and bleed blue and white (school colors).
+
+If a student asks something unrelated to school, politely steer them back to learning or productivity.
+`;
+
 export async function generateChatResponse(messages: { role: 'user' | 'model', content: string }[]) {
+  const model = "gemini-3-flash-preview";
+  
+  const formattedContents = messages.map(msg => ({
+    role: msg.role === 'user' ? 'user' : 'model',
+    parts: [{ text: msg.content }]
+  }));
+
   try {
-    const response = await fetch('/api/chat', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await ai.models.generateContent({
+      model,
+      contents: formattedContents,
+      config: {
+        systemInstruction: SYSTEM_INSTRUCTION,
+        temperature: 0.7,
       },
-      body: JSON.stringify({ messages }),
     });
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      const errorMessage = errorData.error || 'Failed to get response from server';
-      return `⚠️ **AI Connection Error**: ${errorMessage}`;
-    }
-
-    const data = await response.json();
-    return data.response;
+    return response.text || "I'm sorry, I couldn't generate a response.";
   } catch (error) {
-    console.error("Frontend API Error:", error);
-    return "Something went wrong. Please check your internet connection or try again later.";
+    console.error("Gemini API Error:", error);
+    return "Something went wrong with the AI connection. Please check your API key or try again later.";
   }
 }

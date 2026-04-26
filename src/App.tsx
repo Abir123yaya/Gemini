@@ -18,10 +18,10 @@ type Message = {
 };
 
 const QUICK_ACTIONS = [
-  { icon: <BookOpen className="w-4 h-4" />, label: "Help with Homework", prompt: "I need help with my studies. Can you guide me through a problem?" },
-  { icon: <Lightbulb className="w-4 h-4" />, label: "Explain a Concept", prompt: "Can you explain a complex topic in simple terms?" },
-  { icon: <GraduationCap className="w-4 h-4" />, label: "Study Tips", prompt: "What are some effective study techniques and productivity tips?" },
-  { icon: <Sparkles className="w-4 h-4" />, label: "Creative Writing", prompt: "Can you help me brainstorm some ideas for a writing assignment?" },
+  { icon: <BookOpen className="w-4 h-4" />, label: "Help with Homework", prompt: "I need help with my homework. Can you guide me through a problem?" },
+  { icon: <Lightbulb className="w-4 h-4" />, label: "Explain a Concept", prompt: "Can you explain a topic from my science or math class in simple terms?" },
+  { icon: <GraduationCap className="w-4 h-4" />, label: "Study Tips", prompt: "What are some good study tips for a middle school student?" },
+  { icon: <Sparkles className="w-4 h-4" />, label: "Creative Writing", prompt: "Can you help me brainstorm some ideas for my English writing assignment?" },
 ];
 
 export default function App() {
@@ -99,16 +99,12 @@ export default function App() {
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
       )}>
         <div className="flex items-center justify-between">
-          <a 
-            href="#" 
-            className="flex items-center gap-3 hover:opacity-80 transition-opacity"
-            title="Go to former app"
-          >
+          <div className="flex items-center gap-3">
             <div className="bg-blue-600 p-2 rounded-xl">
               <GraduationCap className="w-6 h-6 text-white" />
             </div>
             <h1 className="text-2xl font-black tracking-tight text-blue-900">LV Assist</h1>
-          </a>
+          </div>
           <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden p-2 text-blue-600">
             <X className="w-6 h-6" />
           </button>
@@ -157,7 +153,7 @@ export default function App() {
             </button>
             <div className="hidden lg:flex flex-col">
               <span className="text-xs font-bold text-blue-500 uppercase tracking-wider">Dashboard</span>
-              <span className="text-sm font-semibold text-slate-400">Welcome to LV-Assist Support</span>
+              <span className="text-sm font-semibold text-slate-400">Welcome to LV Middle School Support</span>
             </div>
           </div>
           <div className="flex items-center gap-4">
@@ -181,7 +177,7 @@ export default function App() {
               <div className="space-y-2">
                 <h2 className="text-3xl font-black text-slate-900 tracking-tight">How can I help you?</h2>
                 <p className="text-slate-500 font-medium leading-relaxed">
-                  I'm LV-Assist, your academic AI companion. I can help with projects, research, or study techniques!
+                  I'm your LV Middle School AI assistant. I can help with your homework, explain science projects, or give you study tips!
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-3 w-full">
@@ -281,7 +277,7 @@ export default function App() {
               </button>
             </div>
             <p className="text-center mt-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-              <a href="#" className="hover:text-blue-500 transition-colors">LV-Assist</a> · Powered by AI
+              LV-Assist · Powered by AI for LV Middle School
             </p>
           </div>
         </div>
