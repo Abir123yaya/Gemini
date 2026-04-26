@@ -99,12 +99,16 @@ export default function App() {
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
       )}>
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <a 
+            href="#" 
+            className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+            title="Go to former app"
+          >
             <div className="bg-blue-600 p-2 rounded-xl">
               <GraduationCap className="w-6 h-6 text-white" />
             </div>
             <h1 className="text-2xl font-black tracking-tight text-blue-900">LV Assist</h1>
-          </div>
+          </a>
           <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden p-2 text-blue-600">
             <X className="w-6 h-6" />
           </button>
@@ -277,7 +281,7 @@ export default function App() {
               </button>
             </div>
             <p className="text-center mt-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-              LV-Assist · Powered by AI
+              <a href="#" className="hover:text-blue-500 transition-colors">LV-Assist</a> · Powered by AI
             </p>
           </div>
         </div>
