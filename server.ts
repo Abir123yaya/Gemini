@@ -2,11 +2,19 @@ import express from 'express';
 import { createServer as createViteServer } from 'vite';
 import path from 'path';
 
+import chatHandler from './api/chat.ts';
+
 async function startServer() {
   const app = express();
   const PORT = Number(process.env.PORT) || 3000;
 
   app.use(express.json());
+
+  // Use the same handler as Vercel for the chat API
+  app.post('/api/chat', async (req, res) => {
+    // Adapter for Vercel request/response object expectation
+    await chatHandler(req as any, res as any);
+  });
 
   // Vite middleware for development
   if (process.env.NODE_ENV !== 'production') {
