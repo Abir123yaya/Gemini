@@ -1,14 +1,40 @@
 import { GoogleGenAI, HarmCategory, HarmBlockThreshold } from "@google/genai";
 
+// TO ADD KEY DIRECTLY: Paste your key between the quotes below
+// Example: const HARDCODED_KEY = "AIzaSy...";
+const HARDCODED_KEY = "AIzaSyBzeDV1HHcSeaUYMDPygK7AJAUSEzF-C4k";
+
 let aiInstance: GoogleGenAI | null = null;
 
 export function getAI() {
   if (!aiInstance) {
-    const key = process.env.GEMINI_API_KEY;
-    if (!key || key === "MY_GEMINI_API_KEY" || key === "undefined") {
-      throw new Error("Missing GEMINI_API_KEY environment variable.");
+    // 1. Try hardcoded key first
+    let key = HARDCODED_KEY;
+    
+    // 2. Fallback to various environment variable names
+    if (!key || key.trim() === "") {
+      key = process.env.GEMINI_API_KEY || 
+            process.env.VITE_GEMINI_API_KEY || 
+            process.env.GOOGLE_API_KEY ||
+            process.env.API_KEY ||
+            "";
     }
-    aiInstance = new GoogleGenAI({ apiKey: key });
+    
+    // Diagnostic logging for debugging (only keys, safe)
+    const availableKeys = Object.keys(process.env).filter(k => 
+      k.includes("API") || k.includes("KEY") || k.includes("GEMINI")
+    );
+    console.log("Key resolution check. Found env keys:", availableKeys);
+    
+    if (!key || key === "MY_GEMINI_API_KEY" || key === "undefined" || key.trim() === "") {
+      const errorMsg = `GEMINI_API_KEY is missing.
+Possible Fixes:
+1. Settings > Secrets: Add a secret named 'GEMINI_API_KEY'
+2. Add the key directly in src/services/geminiService.ts
+3. Available keys in this environment: ${availableKeys.join(", ") || "None found"}`;
+      throw new Error(errorMsg);
+    }
+    aiInstance = new GoogleGenAI({ apiKey: key.trim() });
   }
   return aiInstance;
 }

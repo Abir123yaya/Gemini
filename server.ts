@@ -1,8 +1,9 @@
+import 'dotenv/config';
 import express from 'express';
 import { createServer as createViteServer } from 'vite';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { generateChatResponse } from './src/services/geminiService.js';
+import { generateChatResponse } from './src/services/geminiService.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
