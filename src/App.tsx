@@ -277,7 +277,7 @@ export default function App() {
               </button>
             </div>
             <p className="text-center mt-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-              LV-Assist · Powered by AI for LV Middle School
+              LV-Assist
             </p>
           </div>
         </div>
